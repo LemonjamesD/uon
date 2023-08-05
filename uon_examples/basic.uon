@@ -12,7 +12,7 @@ newtype Example {
 expose Example {
 	x = 10;
 	y = 20; // Allows for converting Ints to Floats automatically
-	z = expose Example { // Oh no recursion
+	z = Example { // Oh no recursion
 		x = 20;
 		y = 40;
 		z = None; // Stop recursion
