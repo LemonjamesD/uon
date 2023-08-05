@@ -1,0 +1,36 @@
+// Slashes for comments
+/*
+Multiline Comments
+*/
+
+newtype Example {
+	x: Int;
+	y: Float;
+	z: Maybe Self; // Will transpile to stuff like `null` in JSON
+};
+
+expose Example {
+	x = 10;
+	y = 20; // Allows for converting Ints to Floats automatically
+	z = expose Example { // Oh no recursion
+		x = 20;
+		y = 40;
+		z = None; // Stop recursion
+	};
+};
+
+/*
+If converted to JSON this would become
+```
+{
+	"x": 10,
+	"y": 20.0,
+	"z": {
+		"x": 20,
+		"y": 40.0,
+		"z": null
+	}
+}
+```
+*/
+Final = Example;
